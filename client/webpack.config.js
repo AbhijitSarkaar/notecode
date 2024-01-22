@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin");
 const path = require("path");
 
 module.exports = {
@@ -15,7 +16,7 @@ module.exports = {
         use: "babel-loader",
       },
       {
-        test: /\.scss$/,
+        test: /\.(scss|css)$/,
         use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
@@ -28,5 +29,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "src", "template.html"),
     }),
+    new MonacoWebpackPlugin(),
   ],
+  resolve: {
+    alias: {
+      "~": path.join(__dirname, "src"),
+    },
+  },
 };
